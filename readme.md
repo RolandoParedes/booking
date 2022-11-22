@@ -151,7 +151,7 @@ I used a swagger library and defined in the code the controllers method and inpu
 
 To access the code in github it can be clone from this repository:
 
-- { LINK }
+- https://github.com/RolandoParedes/booking
 
 
 
