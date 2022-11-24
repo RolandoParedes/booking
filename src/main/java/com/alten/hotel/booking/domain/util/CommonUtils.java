@@ -33,6 +33,15 @@ public class CommonUtils {
 		long maxDays = ChronoUnit.DAYS.between(b.getArrivalDate(), b.getDepartureDate()); 
 		return maxDays > 3;
 	};
+	
+	/*
+	 * Method that evaluates if arrival date is after departure date
+	 * @Input BookingReqDto (arrivalDate,departureDate)
+	 * @Output boolean response
+	 * */
+	public static Predicate<BookingReqDto> evaluateArrivalDateDepartureDate = b -> { 
+		return b.getArrivalDate().isAfter(b.getDepartureDate());
+	};
  
 
 	/*
@@ -44,6 +53,11 @@ public class CommonUtils {
 		LocalDate datetimenow = LocalDate.now();		
 		return datetimenow.equals(b.getArrivalDate());
 		
+	};
+	
+	public static Predicate<BookingReqDto> evaluateDayAfterToday = b -> {
+		LocalDate datetimenow = LocalDate.now();
+		return datetimenow.isAfter(b.getArrivalDate());
 	};
 	
 	

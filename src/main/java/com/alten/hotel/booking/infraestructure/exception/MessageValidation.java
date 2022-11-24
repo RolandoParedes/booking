@@ -33,6 +33,13 @@ public class MessageValidation {
 		}else if(CommonUtils.validateNotsameDate.test(bookingReqDto)) {
 			mapMessage.put(ERROR, new ApiResponse<>("Reservation arrival date can not be the same as departure date", HttpStatus.FORBIDDEN.toString(), null));
 			return mapMessage;
+		}else if(CommonUtils.evaluateArrivalDateDepartureDate.test(bookingReqDto)) {
+			mapMessage.put(ERROR, new ApiResponse<>("Arrival Date can not be after departure date", HttpStatus.FORBIDDEN.toString(), null));
+			return mapMessage;
+		}
+		else if(CommonUtils.evaluateDayAfterToday.test(bookingReqDto)) {
+			mapMessage.put(ERROR, new ApiResponse<>("Arrival Date can not be before today", HttpStatus.FORBIDDEN.toString(), null));
+			return mapMessage;
 		}
 		
 		return mapMessage;

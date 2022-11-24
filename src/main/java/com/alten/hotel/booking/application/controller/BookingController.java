@@ -67,6 +67,14 @@ public class BookingController {
 
 		ApiResponse<List<RoomDto>> response = new ApiResponse<>();
 		
+		Map<String,ApiResponse> msgValidation = MessageValidation.validateBooking(new BookingReqDto(0, null, LocalDate.parse(arrivalDate), LocalDate.parse(departureDate), numadults, numchildrens, null, null, null, null));
+		
+		if(!msgValidation.isEmpty()) {
+			response.setCode(msgValidation.get("ERROR").getCode());
+			response.setMessage(msgValidation.get("ERROR").getMessage());
+			return new ResponseEntity<>(response,HttpStatus.FORBIDDEN);
+		}
+		
 		List<RoomDto> lstResp = this.roomService.getAvailableRooms(Integer.parseInt(numadults),Integer.parseInt(numchildrens), LocalDate.parse(arrivalDate), LocalDate.parse(departureDate), start, CommonUtils.getLimitMaximun(limit));
 		response.setResponse(lstResp);
 		response.setMessage("Successfull");
