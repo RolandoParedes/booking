@@ -3,6 +3,8 @@ package com.alten.hotel.booking.domain.usecases;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,7 @@ public class BookingService implements IBookingService{
 		this.roomService = roomService;
 	}
 
+	@Transactional
 	@Override
 	public BookingReqDto saveBooking(BookingReqDto bookingReqDto) {
 		
