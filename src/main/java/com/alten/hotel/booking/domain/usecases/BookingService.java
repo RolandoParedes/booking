@@ -54,13 +54,7 @@ public class BookingService implements IBookingService{
 			throw new RuntimeException("No room available");
 		}
 		
-		boolean isSameRoomNumber = false;
-		
-		for(RoomDto rm : lstResp) {
-			if(rm.getIdroom() == bookingReqDto.getIdroom().getIdroom()) {
-				isSameRoomNumber = true;
-			}
-		}
+		boolean isSameRoomNumber = lstResp.stream().anyMatch(r -> r.getIdroom() == bookingReqDto.getIdroom().getIdroom());
 		
 		if(!isSameRoomNumber) {
 			throw new RuntimeException("Room send was not the same you looked for");
